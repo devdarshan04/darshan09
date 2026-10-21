@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>StudyBuddy 3D — Upload. Understand. Practice. Remember.</title>
+<meta name="description" content="StudyBuddy 3D: upload your PDF notes, ask grounded questions with page citations, practise exam-style MCQs, and revise weak topics with spaced-repetition flashcards.">
+<meta name="theme-color" content="#050914">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='M12 2l9 5v10l-9 5-9-5V7z'/%3E%3Cpath d='M12 12l9-5M12 12L3 7M12 12v10'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="is-login">
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-exam" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></symbol>
+    <symbol id="i-cards" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+    <symbol id="i-docs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+    <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z" fill="currentColor"/></symbol>
+    <symbol id="i-motion" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" id="skip-link" href="#login-main">Skip to main content</a>
+<div class="bg-fallback" aria-hidden="true"></div>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<noscript><div class="noscript">StudyBuddy 3D needs JavaScript to read PDFs, search your notes and run exams. Please enable JavaScript and reload.</div></noscript>
+<div id="toast-region" class="toast-region" role="region" aria-label="Notifications"></div>
+
+<div class="stage" id="stage">
+
+  <!-- ===================== LOGIN ===================== -->
+  <main id="login-main" class="screen login-screen" aria-labelledby="login-title">
+    <section class="hero-copy">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M16 3l11 6v14l-11 6L5 23V9z"/><path d="M5 9l11 6 11-6M16 15v14"/></svg>
+        </span>
+        <span class="brand-name">StudyBuddy <b>3D</b></span>
+      </div>
+      <p class="eyebrow">AI-powered RAG study assistant</p>
+      <h1 id="login-title">Upload. Understand. <span class="grad">Practice. Remember.</span></h1>
+      <p class="lede">Drop in your lecture notes or textbook PDF, ask questions in English, Hindi or Hinglish, and get answers that cite the exact page they came from — then test yourself and revise what you missed.</p>
+      <ul class="feature-list">
+        <li><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg><span><strong>Grounded answers</strong> with [Page N] citations, or an honest refusal</span></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-exam"/></svg><span><strong>Exam mode</strong> — five MCQs built from your own notes</span></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg><span><strong>Weak-topic tracking</strong> from your real attempts</span></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-cards"/></svg><span><strong>3D flashcards</strong> reviewed after 1, 3 and 7 days</span></li>
+      </ul>
+    </section>
+
+    <section class="login-wrap">
+      <!-- CSS-only 3D object, shown only when WebGL is unavailable -->
+      <div class="css-scene" aria-hidden="true">
+        <div class="css-cube"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+
+      <div id="login-card" class="glass login-card tilt" data-tilt="7">
+        <div class="card-glow" aria-hidden="true"></div>
+        <form id="login-form" novalidate>
+          <h2 class="card-title">Sign in to your workspace</h2>
+          <p class="demo-note">
+            <svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>
+            <span><strong>Demo prototype.</strong> There are no accounts and no server. Sign-in only checks the format of what you type; nothing is stored or sent, and it does not protect any data.</span>
+          </p>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@college.edu" aria-describedby="email-error">
+            <p class="field-error" id="email-error" role="alert" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="input-wrap">
+              <input id="password" name="password" type="password" autocomplete="current-password" placeholder="At least 8 characters" aria-describedby="password-error">
+              <button type="button" id="toggle-password" class="icon-btn" aria-label="Show password" aria-pressed="false" aria-controls="password">
+                <svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg>
+              </button>
+            </div>
+            <p class="field-error" id="password-error" role="alert" hidden></p>
+          </div>
+
+          <p class="form-error" id="login-error" role="alert" hidden></p>
+
+          <button type="submit" id="login-submit" class="btn3d primary block">
+            <span class="btn-label">Sign in (demo)</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+          <div class="divider"><span>or</span></div>
+          <button type="button" id="guest-btn" class="btn3d ghost block">Continue as guest</button>
+          <p class="fine">Your Anthropic API key is entered later in <em>Settings</em>. It is completely separate from this form.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== APP ===================== -->
+  <div id="app" class="screen app-shell" hidden>
+    <aside class="sidebar glass" id="sidebar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M16 3l11 6v14l-11 6L5 23V9z"/><path d="M5 9l11 6 11-6M16 15v14"/></svg>
+        </span>
+        <span class="brand-name">StudyBuddy <b>3D</b></span>
+      </div>
+      <nav class="nav" id="main-nav" aria-label="Primary">
+        <button type="button" class="nav-btn" data-view="overview"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg><span>Overview</span></button>
+        <button type="button" class="nav-btn" data-view="chat"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><span>Chat<span class="long"> with Notes</span></span></button>
+        <button type="button" class="nav-btn" data-view="exam"><svg class="ic" aria-hidden="true"><use href="#i-exam"/></svg><span>Exam<span class="long"> Mode</span></span></button>
+        <button type="button" class="nav-btn" data-view="cards"><svg class="ic" aria-hidden="true"><use href="#i-cards"/></svg><span>Flashcards</span><span class="badge" id="nav-due-badge" hidden>0</span></button>
+        <button type="button" class="nav-btn" data-view="docs"><svg class="ic" aria-hidden="true"><use href="#i-docs"/></svg><span><span class="long">Documents</span><span class="short">Docs</span></span></button>
+        <button type="button" class="nav-btn" data-view="settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></button>
+      </nav>
+      <p class="sidebar-foot fine">Prototype · answers can be wrong — check the cited page.</p>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar glass">
+        <div class="top-left">
+          <div class="chip" id="top-doc" title="Active document"><svg class="ic" aria-hidden="true"><use href="#i-docs"/></svg><span id="top-doc-name">No document</span></div>
+          <div class="chip" id="top-status" role="status" aria-live="polite"><span class="dot" id="top-dot"></span><span id="top-status-text">Upload a PDF to begin</span></div>
+          <div class="chip" id="top-conf" hidden title="Estimated relevance of the last retrieval, not a probability"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg><span id="top-conf-text"></span></div>
+        </div>
+        <div class="top-right">
+          <button type="button" id="hc-toggle" class="icon-btn" aria-pressed="false" aria-label="High contrast" title="High contrast"><svg class="ic" aria-hidden="true"><use href="#i-contrast"/></svg></button>
+          <button type="button" id="motion-toggle" class="icon-btn" aria-pressed="false" aria-label="Reduce motion" title="Reduce motion"><svg class="ic" aria-hidden="true"><use href="#i-motion"/></svg></button>
+          <div class="profile"><span class="avatar" id="avatar" aria-hidden="true">G</span><span id="profile-name">Guest</span></div>
+          <button type="button" id="signout-btn" class="icon-btn" aria-label="Sign out" title="Sign out"><svg class="ic" aria-hidden="true"><use href="#i-logout"/></svg></button>
+        </div>
+      </header>
+
+      <main id="app-main" class="content">
+        <div class="view-stack" id="view-stack">
+
+          <!-- Overview -->
+          <section class="view" id="view-overview" data-view="overview" tabindex="-1" aria-labelledby="h-overview" hidden>
+            <header class="view-head">
+              <p class="eyebrow">Overview</p>
+              <h2 id="h-overview">Welcome, <span id="welcome-name">friend</span></h2>
+              <p class="muted">Upload your notes, ask questions grounded in them, test yourself, then revise what you missed.</p>
+            </header>
+
+            <div class="grid-2">
+              <article class="panel glass tilt" data-tilt="3">
+                <h3>Upload a PDF</h3>
+                <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Choose a PDF file, or drop one here">
+                  <svg class="ic ic-xl" aria-hidden="true"><use href="#i-upload"/></svg>
+                  <p><strong>Drop a PDF here</strong> or click to browse</p>
+                  <p class="muted small">Text-based PDFs only (OCR is not implemented). Up to 25 MB and 400 pages.</p>
+                  <input id="file-input" type="file" accept="application/pdf,.pdf" hidden>
+                </div>
+                <div id="upload-progress" class="progress-wrap" hidden>
+                  <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="upload-progressbar"><div class="bar" id="upload-bar"></div></div>
+                  <p id="upload-text" class="small muted" aria-live="polite"></p>
+                </div>
+                <p id="upload-error" class="inline-msg error" role="alert" hidden></p>
+              </article>
+
+              <article class="panel glass tilt" data-tilt="3">
+                <h3>Recent documents</h3>
+                <div id="recent-docs"></div>
+              </article>
+            </div>
+
+            <div class="quick-actions" aria-label="Quick actions">
+              <button type="button" class="btn3d primary" data-goto="chat"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg>Ask questions</button>
+              <button type="button" class="btn3d secondary" data-goto="exam"><svg class="ic" aria-hidden="true"><use href="#i-exam"/></svg>Start an exam</button>
+              <button type="button" class="btn3d secondary" data-goto="cards"><svg class="ic" aria-hidden="true"><use href="#i-cards"/></svg>Review flashcards</button>
+            </div>
+
+            <h3 class="section-title">Your activity <span class="muted small">(counted from this app only)</span></h3>
+            <div class="stats-grid" id="stats-grid"></div>
+
+            <div class="grid-2">
+              <article class="panel glass tilt" data-tilt="3">
+                <h3>Weak topics</h3>
+                <div id="weak-topics-list"></div>
+              </article>
+              <article class="panel glass tilt" data-tilt="3">
+                <h3>Upcoming reviews</h3>
+                <div id="upcoming-list"></div>
+              </article>
+            </div>
+          </section>
+
+          <!-- Chat -->
+          <section class="view" id="view-chat" data-view="chat" tabindex="-1" aria-labelledby="h-chat" hidden>
+            <header class="view-head with-actions">
+              <div>
+                <p class="eyebrow">Chat with Notes</p>
+                <h2 id="h-chat">Ask your notes</h2>
+                <p class="muted" id="chat-doc-label"></p>
+              </div>
+              <button type="button" id="chat-clear" class="btn3d ghost small"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg>Clear chat</button>
+            </header>
+            <div id="chat-empty" class="empty glass" hidden></div>
+            <div id="chat-panel" class="chat-panel glass">
+              <div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversation"></div>
+              <form id="chat-form" class="chat-form" novalidate>
+                <label class="sr-only" for="chat-input">Your question</label>
+                <textarea id="chat-input" rows="1" maxlength="1200" placeholder="Ask in English, Hindi or Hinglish… (Enter to send, Shift+Enter for a new line)"></textarea>
+                <button type="submit" id="chat-send" class="btn3d primary icon-only" aria-label="Send question"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg></button>
+              </form>
+            </div>
+          </section>
+
+          <!-- Exam -->
+          <section class="view" id="view-exam" data-view="exam" tabindex="-1" aria-labelledby="h-exam" hidden>
+            <header class="view-head">
+              <p class="eyebrow">Exam Mode</p>
+              <h2 id="h-exam">Test yourself</h2>
+              <p class="muted">Five multiple-choice questions, each built from a randomly chosen passage of your active document.</p>
+            </header>
+            <div id="exam-root"></div>
+          </section>
+
+          <!-- Flashcards -->
+          <section class="view" id="view-cards" data-view="cards" tabindex="-1" aria-labelledby="h-cards" hidden>
+            <header class="view-head">
+              <p class="eyebrow">Flashcards</p>
+              <h2 id="h-cards">Revise what you missed</h2>
+              <p class="muted">Cards are created from exam questions you answered incorrectly and reviewed 1, 3 and 7 days apart.</p>
+            </header>
+            <div id="cards-root"></div>
+          </section>
+
+          <!-- Documents -->
+          <section class="view" id="view-docs" data-view="docs" tabindex="-1" aria-labelledby="h-docs" hidden>
+            <header class="view-head">
+              <p class="eyebrow">Uploaded Documents</p>
+              <h2 id="h-docs">Your documents</h2>
+              <p class="muted">Select the document to study from, or remove one you no longer need.</p>
+            </header>
+            <div id="docs-root"></div>
+          </section>
+
+          <!-- Settings -->
+          <section class="view" id="view-settings" data-view="settings" tabindex="-1" aria-labelledby="h-settings" hidden>
+            <header class="view-head">
+              <p class="eyebrow">Settings</p>
+              <h2 id="h-settings">Settings</h2>
+            </header>
+
+            <article class="panel glass">
+              <h3>Anthropic API key <span class="muted small">(optional, for local testing only)</span></h3>
+              <p class="callout warn"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg><span>A key typed into a web page is visible to anyone who can open this browser. It is kept in memory only (never written to storage) and disappears when you reload. Do <strong>not</strong> use a production key here — see the README for the server-proxy option.</span></p>
+              <div class="field">
+                <label for="set-key">API key</label>
+                <div class="input-wrap">
+                  <input id="set-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-…" aria-describedby="key-hint">
+                  <button type="button" id="set-key-toggle" class="icon-btn" aria-label="Show API key" aria-pressed="false" aria-controls="set-key"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg></button>
+                </div>
+                <p class="fine" id="key-hint">Sent only to the endpoint below, in the <code>x-api-key</code> header.</p>
+              </div>
+              <div class="row-actions">
+                <button type="button" id="set-key-save" class="btn3d primary small">Use key for this session</button>
+                <button type="button" id="set-key-clear" class="btn3d ghost small">Clear key</button>
+                <span id="key-status" class="small muted" role="status"></span>
+              </div>
+              <div class="field">
+                <label for="set-endpoint">API endpoint <span class="muted small">(leave empty for the default)</span></label>
+                <input id="set-endpoint" type="url" inputmode="url" placeholder="https://api.anthropic.com/v1/messages" autocomplete="off">
+                <p class="fine">With a key, the default is Anthropic's endpoint. Without a key, the app tries same-origin <code>/v1/messages</code> (works only where the host provides it). Set your own proxy URL here to keep the key on a server.</p>
+              </div>
+              <p class="fine">Model: <code>claude-sonnet-4-6</code> · max_tokens: <code>1000</code></p>
+            </article>
+
+            <article class="panel glass">
+              <h3>Retrieval</h3>
+              <div class="settings-grid">
+                <div class="field">
+                  <label for="set-chunk">Chunk size (words)</label>
+                  <input id="set-chunk" type="number" min="100" max="1000" step="10">
+                </div>
+                <div class="field">
+                  <label for="set-overlap">Overlap (words)</label>
+                  <input id="set-overlap" type="number" min="0" max="300" step="10">
+                </div>
+              </div>
+              <div class="field">
+                <label for="set-threshold">Refusal threshold: <output id="set-threshold-val">25%</output></label>
+                <input id="set-threshold" type="range" min="5" max="60" step="1">
+                <p class="fine">If the best passage scores below this, the app refuses to answer and does <strong>not</strong> call the model. The score is an estimated relevance indicator (share of the best-case BM25 score for your question), not a probability. Higher = stricter.</p>
+              </div>
+              <div class="row-actions">
+                <button type="button" id="set-reindex" class="btn3d secondary small"><svg class="ic" aria-hidden="true"><use href="#i-refresh"/></svg>Apply &amp; re-index documents</button>
+                <span id="reindex-status" class="small muted" role="status"></span>
+              </div>
+            </article>
+
+            <article class="panel glass">
+              <h3>Saved data &amp; accessibility</h3>
+              <p id="storage-status" class="callout"></p>
+              <div class="row-actions">
+                <button type="button" id="set-motion" class="btn3d secondary small" aria-pressed="false">Reduce motion: off</button>
+                <button type="button" id="set-hc" class="btn3d secondary small" aria-pressed="false">High contrast: off</button>
+                <button type="button" id="set-reset" class="btn3d danger small"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg><span>Erase all saved data</span></button>
+              </div>
+            </article>
+          </section>
+
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>
